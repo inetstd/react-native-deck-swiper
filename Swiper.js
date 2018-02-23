@@ -15,7 +15,7 @@ const LABEL_TYPES = {
 }
 
 class Swiper extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -32,8 +32,8 @@ class Swiper extends Component {
     }
   }
 
-  componentWillReceiveProps (newProps) {
-    if(!_.isEqual(this.props.cards, newProps.cards) || this.props.cardIndex !== newProps.cardIndex) {
+  componentWillReceiveProps(newProps) {
+    if (!_.isEqual(this.props.cards, newProps.cards) || this.props.cardIndex !== newProps.cardIndex) {
       this.setState({
         ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
         cards: newProps.cards,
@@ -50,10 +50,10 @@ class Swiper extends Component {
     firstCardIndex = firstCardIndex || 0
     const previousCardIndex = firstCardIndex === 0 ? cards.length - 1 : firstCardIndex - 1
     const secondCardIndex = firstCardIndex === cards.length - 1 ? 0 : firstCardIndex + 1
-    return {firstCardIndex, secondCardIndex, previousCardIndex}
+    return { firstCardIndex, secondCardIndex, previousCardIndex }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this._animatedValueX = 0
     this._animatedValueY = 0
 
@@ -64,7 +64,7 @@ class Swiper extends Component {
     this.initializePanResponder()
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.state.pan.x.removeAllListeners()
     this.state.pan.y.removeAllListeners()
   }
@@ -250,7 +250,6 @@ class Swiper extends Component {
     }
 
     this.setState({
-      labelType: LABEL_TYPES.NONE,
       slideGesture: false
     })
   }
@@ -287,7 +286,7 @@ class Swiper extends Component {
     }
   }
 
-  mustDecrementCardIndex (animatedValueX, animatedValueY) {
+  mustDecrementCardIndex(animatedValueX, animatedValueY) {
     const {
       isSwipingLeft,
       isSwipingRight,
@@ -303,7 +302,7 @@ class Swiper extends Component {
     )
   }
 
-  getSwipeDirection (animatedValueX, animatedValueY) {
+  getSwipeDirection(animatedValueX, animatedValueY) {
     const isSwipingLeft = animatedValueX < -this.props.horizontalThreshold
     const isSwipingRight = animatedValueX > this.props.horizontalThreshold
     const isSwipingTop = animatedValueY < -this.props.verticalThreshold
@@ -585,7 +584,7 @@ class Swiper extends Component {
       outputRange: this.props.outputRotationRange
     })
 
-  render () {
+  render() {
     return (
       <View
         style={[
@@ -713,13 +712,13 @@ class Swiper extends Component {
 
     return (
       <Animated.View style={this.calculateOverlayLabelWrapperStyle()}>
-        { !overlayLabels[labelType].element &&
+        {!overlayLabels[labelType].element &&
           <Text style={this.calculateOverlayLabelStyle()}>
             {overlayLabels[labelType].title}
           </Text>
         }
 
-        { overlayLabels[labelType].element &&
+        {overlayLabels[labelType].element &&
           overlayLabels[labelType].element
         }
       </Animated.View>
@@ -735,7 +734,7 @@ Swiper.propTypes = {
   cardIndex: PropTypes.number,
   cardStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   cardVerticalMargin: PropTypes.number,
-  cards: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  cards: PropTypes.array.isRequired,
   children: PropTypes.any,
   childrenOnTop: PropTypes.bool,
   disableBottomSwipe: PropTypes.bool,
